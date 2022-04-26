@@ -97,7 +97,6 @@ data "aws_iam_policy_document" "cloudtrail-assume-role-policy" {
 }
 
 
-
 resource "aws_iam_role" "trail-role" {
   name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.cloudtrail-assume-role-policy.json
@@ -126,7 +125,7 @@ data "aws_iam_policy_document" "inline-policy" {
 resource "sumologic_cloudtrail_source" "terraform_cloudtrail_source" {
   name          = "Amazon Cloultrail"
   description   = "My description"
-  category      = "aws/cloudtrail"
+  category      = "aws/logs/cloudtrail"
   content_type  = "AwsCloudTrailBucket"
   scan_interval = 300000
   paused        = false
@@ -146,7 +145,7 @@ resource "sumologic_cloudtrail_source" "terraform_cloudtrail_source" {
 
 resource "sumologic_collector" "collector" {
   name        = "AWS CloudTrail Collector"
-  description = "Just testing this"
+  description = "AWS CloudTrail Collector"
 }
 
 
